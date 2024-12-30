@@ -27,6 +27,19 @@ class BG3CalcWindow(QMainWindow): #window display info
         self.display.setAlignment(Qt.AlignmentFlag.AlignRight)
         self.display.setReadOnly(True)
         self.generalLayout.addWidget(self.display)
+
+        # Add first user input field
+        self.userInput1 = QLineEdit()
+        self.userInput1.setFixedHeight(DISPLAY_HEIGHT)
+        self.userInput1.setAlignment(Qt.AlignmentFlag.AlignRight)
+        self.generalLayout.addWidget(self.userInput1)
+
+        # Add second user input field
+        self.userInput2 = QLineEdit()
+        self.userInput2.setFixedHeight(DISPLAY_HEIGHT)
+        self.userInput2.setAlignment(Qt.AlignmentFlag.AlignRight)
+        self.generalLayout.addWidget(self.userInput2)
+
     def _createButtons(self):
         self.buttonMap = {}
         buttonsLayout = QGridLayout()
