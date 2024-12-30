@@ -3,7 +3,7 @@
 import sys #for terminating app
 from functools import partial
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QLineEdit, QPushButton, QVBoxLayout, QTableWidget #required classes
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QLineEdit, QPushButton, QVBoxLayout, QTableWidget, QTableWidgetItem #required classes
 
 ERROR_MSG = "ERROR"
 WINDOW_SIZE = 235
@@ -21,6 +21,8 @@ class BG3CalcWindow(QMainWindow): #window display info
         self.setCentralWidget(centralWidget)
         self._createDisplay()
         self._createButtons()
+        self._createMonthTable()  # Add this line to initialize the table
+
     def _createDisplay(self):
         self.display = QLineEdit()
         self.display.setFixedHeight(DISPLAY_HEIGHT)
@@ -42,6 +44,18 @@ class BG3CalcWindow(QMainWindow): #window display info
                 self.buttonMap[key].setFixedSize(BUTTON_SIZE, BUTTON_SIZE)
                 buttonsLayout.addWidget(self.buttonMap[key], row, col)
         self.generalLayout.addLayout(buttonsLayout)
+    def _createMonthTable(self):
+        self.monthTable = QTableWidget(3, 4)  # 3 rows, 4 columns
+        months = [
+            "January", "February", "March", "April",
+            "May", "June", "July", "August",
+            "September", "October", "November", "December"
+        ]
+        for i, month in enumerate(months):
+            row = i // 4
+            col = i % 4
+            self.monthTable.setItem(row, col, QTableWidgetItem(month))
+        self.generalLayout.addWidget(self.monthTable)
     def setDisplayText(self, text):
         self.display.setText(text)
         self.display.setFocus()
